@@ -3,12 +3,19 @@ public class Practice {
         Node myNode = new Node('w', null);
         Node otherNode = new Node('x', null);
         Node coolNode = new Node('e', null);
-        
         myNode.next = otherNode;
         otherNode.next = coolNode;
+        coolNode.next = null;
 
-        Node current = myNode;
+        // int numNodes = length(myNode);
+        // System.out.println(numNodes);
 
+        
+
+        Node newHead = removeAt(myNode, 2);
+        
+        Node current = newHead;
+ 
         while(current != null) {
             System.out.println(current.value);
             current = current.next;
@@ -22,4 +29,44 @@ public class Practice {
 
         
     }
+        // count how many nodes are in the linke dlist
+        public static int length (Node head) {
+            int count = 0;
+
+            Node current = head;
+
+            while(current !=null) {
+                count++;
+                current = current.next;
+            }
+                return count;
+        }
+            //remove node at removeIdx
+            // head is at index 0
+            // example w->x->e->f
+            // removeIdx 2
+            // restul w->x->f
+            // Return the new head of the list
+           public static Node removeAt(Node head, int removeIdx) {
+            if(removeIdx < 0) {
+               throw new IndexOutOfBoundsException("RemoveIdx must be >= 0;");
+            }
+            if (removeIdx == 0) {
+                return head.next;
+            }
+            Node current = head;
+
+            for(int i = 0; i < removeIdx -1; i++) {
+                if (current == null) {
+                    throw new IndexOutOfBoundsException("removeIdx must be < len(list)");
+                }
+                current = current.next;
+            }
+        
+        
+            current.next = current.next.next;
+
+            return head;
+    }
+
 }
